@@ -5,7 +5,6 @@ import shutil
 import zipfile
 import tempfile
 import os
-import subprocess
 from pathlib import Path
 from dotenv import load_dotenv
 load_dotenv()
@@ -13,6 +12,7 @@ load_dotenv()
 
 WWW_DIR=os.getenv('WWW_DIR', "/local/www/")
 HTTP_DIR=os.path.join(WWW_DIR, os.getenv('HTTP_DIR', "htdocs"))
+SITE_NAME=os.path.join(WWW_DIR, os.getenv('SITE_NAME', "BRC"))
 
 
 def get_automad():
@@ -42,6 +42,36 @@ def get_automad():
     shutil.rmtree(os.path.join(HTTP_DIR, 'pages'))
     shutil.rmtree(os.path.join(HTTP_DIR, 'config'))
     shutil.rmtree(os.path.join(HTTP_DIR, 'shared'))
+
+    if not os.path.exists(os.path.join(WWW_DIR, 'cache')):
+        os.mkdir(os.path.join(WWW_DIR, 'cache'))
+    if not os.path.exists(os.path.join(WWW_DIR, 'pages')):
+        os.mkdir(os.path.join(WWW_DIR, 'pages'))
+    if not os.path.exists(os.path.join(WWW_DIR, 'config')):
+        os.mkdir(os.path.join(WWW_DIR, 'config'))
+    if not os.path.exists(os.path.join(WWW_DIR, 'shared')):
+        os.mkdir(os.path.join(WWW_DIR, 'shared'))
+
+    if not os.path.exists(os.path.join(WWW_DIR, 'shared', 'data.txt')):
+        with open(os.path.join(WWW_DIR, 'shared', 'data.txt'), 'w') as writer:
+            writer.writelines('''
+sitename: {}
+-
+theme: brc_automad_theme
+-
+appleTouchIcon: /shared/apple-touch-icon.png
+-
+favicon: /shared/favicon.ico
+-
+urlSearchResults: /
+-
+urlTutorials: /tutorials
+            '''.format(SITE_NAME))
+
+
+    if not os.path.exists(os.path.join(WWW_DIR, 'pages', 'basic.txt')):
+        with open(os.path.join(WWW_DIR, 'pages', 'basic.txt'), 'w') as writer:
+            writer.writelines('')
 
     os.symlink(os.path.join(WWW_DIR, 'cache'), os.path.join(HTTP_DIR, 'cache'))
     os.symlink(os.path.join(WWW_DIR, 'pages'), os.path.join(HTTP_DIR, 'pages'))
