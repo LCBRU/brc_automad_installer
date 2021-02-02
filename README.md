@@ -33,6 +33,33 @@ To deploy the app, run the command:
 install.py
 ```
 
+### Directory Permissions
+
+The install script attempts to set the permissions, but it doesn't work.
+Therefore, you have to do it yourself, using this command:
+
+```bash
+setfacl -m u:wwwrun:rwx cache
+setfacl -m u:wwwrun:rwx config
+setfacl -m u:wwwrun:rwx shared
+setfacl -m u:wwwrun:rwx pages
+```
+
+### Amend the Apache Config
+
+Change the following two lines in the Apache config file `/local/apache/etc/httpd.cong`:
+
+```
+  Options All
+  AllowOverride All
+```
+
+Add the rewrite module to the file `/local/apache/etc/loadmodule.conf`:
+
+```
+LoadModule php7_module      /usr/lib64/httpd/modules/mod_php7.so
+```
+
 ## Site Management
 
 To edit the site, use the Dashboard at /dashboard.
