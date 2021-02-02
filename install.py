@@ -12,11 +12,16 @@ load_dotenv()
 
 WWW_DIR=os.getenv('WWW_DIR', "/local/www/")
 HTTP_DIR=os.path.join(WWW_DIR, os.getenv('HTTP_DIR', "htdocs"))
-SITE_NAME=os.path.join(WWW_DIR, os.getenv('SITE_NAME', "BRC"))
+SITE_NAME=os.getenv('SITE_NAME', "BRC")
 
 
 def get_automad():
     pwd = os.path.realpath('.')
+
+    if not os.path.exists(WWW_DIR):
+        os.mkdir(WWW_DIR)
+    if not os.path.exists(HTTP_DIR):
+        os.mkdir(HTTP_DIR)
 
     with tempfile.TemporaryDirectory() as tmpdirname:
         os.chdir(tmpdirname)
