@@ -86,6 +86,7 @@ urlTutorials: /tutorials
     shutil.rmtree(os.path.join(HTTP_DIR, 'packages'))
     os.mkdir(os.path.join(HTTP_DIR, 'packages'))
 
+    os.chdir(WWW_DIR)
     os.system("setfacl -m u:wwwrun:rwx {}".format(os.path.join(WWW_DIR, 'shared')))
     os.system("setfacl -m u:wwwrun:rwx {}".format(os.path.join(WWW_DIR, 'pages')))
     os.system("setfacl -m u:wwwrun:rwx {}".format(os.path.join(WWW_DIR, 'config')))
