@@ -16,14 +16,14 @@ git clone https://github.com/LCBRU/brc_automad_installer.git
 
 3. Install Python Requirements
 
-  1. Create the python virtual environmenmt by running the command: `python3 -m venv venv`
-  2. Activate the virtual environment: `. venv/bin/activate`
-  3. Install the requirements `pip install -r requirements.txt`
+    1. Create the python virtual environmenmt by running the command: `python3 -m venv venv`
+    2. Activate the virtual environment: `. venv/bin/activate`
+    3. Install the requirements `pip install -r requirements.txt`
 
 4. Amend the parameters
 
-  1. Copy the file `example.env` to `.env`.
-  2. Amend the file to fill in the correct values for the `WWW_DIR` and `HTTP_DIR`.
+    1. Copy the file `example.env` to `.env`.
+    2. Amend the file to fill in the correct values for the `WWW_DIR` and `HTTP_DIR`.
 
 ## Deployment
 
